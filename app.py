@@ -26,7 +26,7 @@ app = Flask(__name__)
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
-    "change-this-secret-key-later"
+    "local-development-secret-key"
 )
 
 
@@ -44,7 +44,9 @@ ADMIN_PASSWORD = os.environ.get(
 # DATABASE SETTINGS
 # =========================================
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL"
+)
 
 
 # =========================================
@@ -99,6 +101,10 @@ def create_database_table():
 
         connection.close()
 
+        print(
+            "Using local SQLite database."
+        )
+
         return
 
 
@@ -140,6 +146,9 @@ def create_database_table():
 
         connection.close()
 
+        print(
+            "Using Render PostgreSQL database."
+        )
 
     except Exception as error:
 
@@ -183,7 +192,6 @@ def save_response():
         data = request.get_json(
             silent=True
         )
-
 
         if not data:
 
@@ -251,7 +259,6 @@ def save_response():
 
             connection = get_sqlite_connection()
 
-
             connection.execute(
                 """
                 INSERT INTO responses
@@ -264,6 +271,7 @@ def save_response():
 
                 VALUES (?, ?, ?, ?)
                 """,
+
                 (
                     answer,
                     selected_date,
@@ -273,7 +281,6 @@ def save_response():
                     )
                 )
             )
-
 
             connection.commit()
 
@@ -288,14 +295,11 @@ def save_response():
 
             import psycopg2
 
-
             connection = psycopg2.connect(
                 DATABASE_URL
             )
 
-
             cursor = connection.cursor()
-
 
             cursor.execute(
                 """
@@ -309,6 +313,7 @@ def save_response():
 
                 VALUES (%s, %s, %s, %s)
                 """,
+
                 (
                     answer,
                     selected_date,
@@ -316,7 +321,6 @@ def save_response():
                     created_at
                 )
             )
-
 
             connection.commit()
 
@@ -341,7 +345,6 @@ def save_response():
             "Error while saving response:",
             error
         )
-
 
         return jsonify({
             "success": False,
@@ -391,7 +394,6 @@ def admin():
             session[
                 "admin_logged_in"
             ] = True
-
 
             return redirect(
                 url_for(
@@ -450,30 +452,20 @@ def admin_dashboard():
 
         connection = get_sqlite_connection()
 
-
         rows = connection.execute(
             """
             SELECT
-
                 id,
-
                 answer,
-
                 selected_date,
-
                 selected_food,
-
                 created_at
-
             FROM responses
-
             ORDER BY id DESC
             """
         ).fetchall()
 
-
         connection.close()
-
 
         responses = [
             dict(row)
@@ -491,38 +483,26 @@ def admin_dashboard():
 
             import psycopg2
 
-
             connection = psycopg2.connect(
                 DATABASE_URL
             )
 
-
             cursor = connection.cursor()
-
 
             cursor.execute(
                 """
                 SELECT
-
                     id,
-
                     answer,
-
                     selected_date,
-
                     selected_food,
-
                     created_at
-
                 FROM responses
-
                 ORDER BY id DESC
                 """
             )
 
-
             rows = cursor.fetchall()
-
 
             for row in rows:
 
@@ -574,7 +554,6 @@ def admin_dashboard():
 def admin_logout():
 
     session.clear()
-
 
     return redirect(
         url_for(

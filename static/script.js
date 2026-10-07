@@ -179,7 +179,7 @@ yesButton.addEventListener(
 
 /* =========================================
    NO BUTTON
-   MOVES AWAY WHEN CLICKED
+   STAYS INSIDE WHITE BOX
 ========================================= */
 
 noButton.addEventListener(
@@ -218,6 +218,7 @@ noButton.addEventListener(
 
 /* =========================================
    MOVE NO BUTTON
+   ONLY INSIDE WHITE BOX
 ========================================= */
 
 function moveNoButton() {
@@ -226,41 +227,107 @@ function moveNoButton() {
         document.getElementById("dateCard");
 
 
-    const cardRect =
-        card.getBoundingClientRect();
+    if (!card) {
+
+        return;
+
+    }
 
 
-    const buttonRect =
-        noButton.getBoundingClientRect();
+    /*
+     * Make the white box the
+     * positioning container.
+     */
 
+    card.style.position =
+        "relative";
+
+
+    /*
+     * Make the NO button
+     * absolutely positioned
+     * inside the white box.
+     */
+
+    noButton.style.position =
+        "absolute";
+
+
+    /*
+     * Get the size of the
+     * white box.
+     */
+
+    const cardWidth =
+        card.clientWidth;
+
+    const cardHeight =
+        card.clientHeight;
+
+
+    /*
+     * Get the size of
+     * the NO button.
+     */
+
+    const buttonWidth =
+        noButton.offsetWidth;
+
+    const buttonHeight =
+        noButton.offsetHeight;
+
+
+    /*
+     * Safe padding from
+     * the white box edges.
+     */
+
+    const padding = 20;
+
+
+    /*
+     * Calculate the maximum
+     * possible position.
+     */
 
     const maxX =
-        cardRect.width -
-        buttonRect.width -
-        20;
+        Math.max(
+            padding,
+            cardWidth -
+            buttonWidth -
+            padding
+        );
 
 
     const maxY =
-        cardRect.height -
-        buttonRect.height -
-        20;
+        Math.max(
+            padding,
+            cardHeight -
+            buttonHeight -
+            padding
+        );
 
+
+    /*
+     * Generate random position
+     * inside the white box.
+     */
 
     const randomX =
-        Math.random() * maxX -
-        (cardRect.width / 2) +
-        (buttonRect.width / 2);
+        padding +
+        Math.random() *
+        (maxX - padding);
 
 
     const randomY =
-        Math.random() * maxY -
-        (cardRect.height / 2) +
-        (buttonRect.height / 2);
+        padding +
+        Math.random() *
+        (maxY - padding);
 
 
-    noButton.style.position =
-        "relative";
-
+    /*
+     * Apply the new position.
+     */
 
     noButton.style.left =
         randomX + "px";
@@ -271,8 +338,13 @@ function moveNoButton() {
 
 
     noButton.style.transition =
-        "all 0.25s ease";
+        "left 0.25s ease, top 0.25s ease";
 
+
+    /*
+     * Change the text after
+     * the button moves.
+     */
 
     noButton.textContent =
         "NO 😭";
