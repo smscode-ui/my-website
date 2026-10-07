@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Date Responses</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7028e4,
+                    #c42ad6,
+                    #f107a3
+                );
+
+            padding: 30px 20px;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+        }
+
+
+        .header {
+
+            background: #fff7fd;
+
+            border-radius: 25px;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px
+                rgba(49, 0, 60, 0.25);
+
+        }
+
+
+        .header-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+
+            color: #8a22c9;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .subtitle {
+
+            color: #777;
+
+            font-size: 16px;
+
+        }
+
+
+        .response-count {
+
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            background: #f3d9fa;
+
+            color: #7b2ff7;
+
+            font-weight: bold;
+
+        }
+
+
+        .responses {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 20px;
+
+        }
+
+
+        .response-card {
+
+            background: #fff7fd;
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(49, 0, 60, 0.22);
+
+        }
+
+
+        .response-number {
+
+            color: #999;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .answer {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .answer.yes {
+
+            color: #e91e63;
+
+        }
+
+
+        .answer.no {
+
+            color: #777;
+
+        }
+
+
+        .details {
+
+            border-top:
+                1px solid #f0d5f5;
+
+            padding-top: 15px;
+
+        }
+
+
+        .detail {
+
+            color: #666;
+
+            margin-bottom: 10px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .detail strong {
+
+            color: #6d278f;
+
+        }
+
+
+        .empty {
+
+            background: #fff7fd;
+
+            border-radius: 25px;
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            color: #777;
+
+            box-shadow:
+                0 20px 50px
+                rgba(49, 0, 60, 0.25);
+
+        }
+
+
+        .empty-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .logout-button {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 12px 25px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7b2ff7,
+                    #f107a3
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .logout-button:hover {
+
+            transform: scale(1.04);
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .header {
+
+                padding: 25px 18px;
+
+            }
+
+
+            h1 {
+
+                font-size: 28px;
+
+            }
+
+
+            .response-card {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="header-icon">
+                💕
+            </div>
+
+
+            <h1>
+                Date Responses
+            </h1>
+
+
+            <p class="subtitle">
+                Here are the responses from your website.
+            </p>
+
+
+            <div class="response-count">
+
+                {{ responses|length }}
+                response{% if responses|length != 1 %}s{% endif %}
+
+            </div>
+
+
+            <br>
+
+
+            <a
+                href="{{ url_for('admin_logout') }}"
+                class="logout-button">
+                Logout 🔐
+            </a>
+
+        </div>
+
+
+        <!-- RESPONSES -->
+
+        {% if responses %}
+
+
+            <div class="responses">
+
+
+                {% for response in responses %}
+
+
+                    <div class="response-card">
+
+
+                        <div class="response-number">
+
+                            Response #{{ response.id }}
+
+                        </div>
+
+
+                        {% if response.answer == "YES" %}
+
+                            <div class="answer yes">
+
+                                ❤️ YES!
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="answer no">
+
+                                😭 NO
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="details">
+
+
+                            <div class="detail">
+
+                                📅
+
+                                <strong>
+                                    Date:
+                                </strong>
+
+                                {{ response.selected_date or "Not selected" }}
+
+                            </div>
+
+
+                            <div class="detail">
+
+                                🍽️
+
+                                <strong>
+                                    Food:
+                                </strong>
+
+                                {{ response.selected_food or "Not selected" }}
+
+                            </div>
+
+
+                            <div class="detail">
+
+                                🕐
+
+                                <strong>
+                                    Time:
+                                </strong>
+
+                                {{ response.created_at }}
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    💌
+                </div>
+
+
+                <h2>
+                    No responses yet
+                </h2>
+
+
+                <p style="margin-top: 10px;">
+
+                    When someone uses your website,
+                    their response will appear here.
+
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</body>
+
+</html>

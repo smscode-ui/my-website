@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Private Admin Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7028e4,
+                    #c42ad6,
+                    #f107a3
+                );
+
+            padding: 20px;
+
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            background: #fff7fd;
+
+            padding: 40px 30px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 70px
+                rgba(49, 0, 60, 0.35);
+
+        }
+
+
+        .icon {
+
+            font-size: 70px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        h1 {
+
+            color: #8a22c9;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        p {
+
+            color: #777;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 2px solid #e0b5ef;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        input:focus {
+
+            border-color: #c42ad6;
+
+        }
+
+
+        button {
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7b2ff7,
+                    #f107a3
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        button:hover {
+
+            transform: scale(1.02);
+
+        }
+
+
+        .error {
+
+            color: #e53973;
+
+            margin-top: 15px;
+
+            margin-bottom: 0;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-card">
+
+        <div class="icon">
+            🔐
+        </div>
+
+
+        <h1>
+            Private Responses
+        </h1>
+
+
+        <p>
+            Enter your admin password
+        </p>
+
+
+        <form method="POST">
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button type="submit">
+                View Responses ❤️
+            </button>
+
+        </form>
+
+
+        {% if error %}
+
+            <p class="error">
+                {{ error }}
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+</body>
+
+</html>

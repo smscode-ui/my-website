@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Will You Go On A Date With Me?</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Decorative floating hearts -->
+    <div class="floating-heart heart-one">♡</div>
+    <div class="floating-heart heart-two">♡</div>
+    <div class="floating-heart heart-three">♡</div>
+    <div class="floating-heart heart-four">♡</div>
+
+
+    <!-- Main website card -->
+    <main class="date-card" id="dateCard">
+
+        <!-- First screen -->
+        <section class="screen active" id="screenOne">
+
+            <div class="heart-icon">
+                💕
+            </div>
+
+            <h1>
+                Will you go on a date with me?
+            </h1>
+
+            <p class="subtitle">
+                I promise it'll be fun! 🥰
+            </p>
+
+            <div class="buttons">
+
+                <button
+                    class="yes-btn"
+                    id="yesButton">
+                    YES 💗
+                </button>
+
+                <button
+                    class="no-btn"
+                    id="noButton">
+                    NO 😭
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Second screen -->
+        <section class="screen" id="screenTwo">
+
+            <div class="success-icon">
+                🥰
+            </div>
+
+            <h1>
+                YAY! You said YES! 💕
+            </h1>
+
+            <p class="subtitle">
+                I knew you would!
+            </p>
+
+            <p class="message">
+                Now let's plan our perfect date together. 💗
+            </p>
+
+            <button
+                class="continue-btn"
+                id="continueButton">
+                Let's Plan It 💕
+            </button>
+
+        </section>
+
+
+        <!-- Third screen -->
+        <section class="screen" id="screenThree">
+
+            <div class="calendar-icon">
+                📅
+            </div>
+
+            <h1>
+                Pick a date 💗
+            </h1>
+
+            <p class="subtitle">
+                When are you free?
+            </p>
+
+            <input
+                type="date"
+                id="dateInput"
+                class="date-input">
+
+            <button
+                class="continue-btn"
+                id="dateButton">
+                Continue 💕
+            </button>
+
+            <p
+                class="error-message"
+                id="dateError">
+            </p>
+
+        </section>
+
+
+        <!-- Fourth screen -->
+        <section class="screen" id="screenFour">
+
+            <div class="food-icon">
+                🍕
+            </div>
+
+            <h1>
+                What are we eating? 😋
+            </h1>
+
+            <p class="subtitle">
+                Choose your favorite!
+            </p>
+
+            <div class="food-options">
+
+                <button
+                    class="food-option"
+                    data-food="Pizza">
+                    🍕
+                    <span>Pizza</span>
+                </button>
+
+                <button
+                    class="food-option"
+                    data-food="Burger">
+                    🍔
+                    <span>Burger</span>
+                </button>
+
+                <button
+                    class="food-option"
+                    data-food="Pasta">
+                    🍝
+                    <span>Pasta</span>
+                </button>
+
+                <button
+                    class="food-option"
+                    data-food="Sushi">
+                    🍣
+                    <span>Sushi</span>
+                </button>
+
+            </div>
+
+            <button
+                class="continue-btn"
+                id="foodButton">
+                Continue 💕
+            </button>
+
+        </section>
+
+
+        <!-- Final screen -->
+        <section class="screen" id="screenFive">
+
+            <div class="final-icon">
+                💖
+            </div>
+
+            <h1>
+                It's a date! 🥰
+            </h1>
+
+            <p class="subtitle">
+                I can't wait! 💕
+            </p>
+
+            <div class="summary-box">
+
+                <p>
+                    📅 <strong>Date:</strong>
+                    <span id="selectedDate">
+                        -
+                    </span>
+                </p>
+
+                <p>
+                    🍽️ <strong>Food:</strong>
+                    <span id="selectedFood">
+                        -
+                    </span>
+                </p>
+
+            </div>
+
+            <p class="final-message">
+                This is going to be amazing! 💗
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
